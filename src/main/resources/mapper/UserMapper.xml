@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jluster.cms.mapper.UserMapper">
+
+    <sql id="selectUserColumn">
+       id,login,email,phone,password,status,nick_name,created_by,modified_by,created_time,modified_time
+    </sql>
+    <sql id="insertUserColumn">
+       login,email,phone,password,status,nick_name,created_by,modified_by
+    </sql>
+
+    <!--查找单个用户-->
+    <select id="selectUser" parameterType="com.jluster.cms.entity.User" resultType="com.jluster.cms.entity.User">
+        select
+        <include refid="selectUserColumn"/>
+        from uc_user
+        where (login=#{login} or email=#{email}) and password=#{password}
+    </select>
+
+    <!--新增用户-->
+    <!--返回主键  useGeneratedKeys="true" keyProperty="id"-->
+    <insert id="insertUser" parameterType="com.jluster.cms.entity.User">
+        insert into uc_user (<include refid="insertUserColumn"/>)
+        values (#{login},#{email},#{phone},#{password},#{status},#{nick_name},#{created_by},#{modified_by})
+    </insert>
+
+    <!--修改用户昵称-->
+    <update id="updateUser" parameterType="com.jluster.cms.entity.User">
+        update uc_user
+        set nick_name=#{nick_name}
+        where id=#{id}
+    </update>
+
+    <!--删除单个用户-->
+    <delete id="deleteUser" parameterType="Long">
+        delete from uc_user where id=#{id}
+    </delete>
+</mapper>
