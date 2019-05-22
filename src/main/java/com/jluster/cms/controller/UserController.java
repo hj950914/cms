@@ -2,7 +2,7 @@ package com.jluster.cms.controller;
 
 import com.jluster.cms.entity.User;
 import com.jluster.cms.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -15,11 +15,11 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
  * Description: <描述>
  */
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(produces = APPLICATION_JSON_UTF8_VALUE)
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     /**
      * 新增用户

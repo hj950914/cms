@@ -3,10 +3,9 @@ package com.jluster.cms.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jluster.cms.entity.User;
 import com.jluster.cms.mapper.UserMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.io.IOException;
 
 /**
@@ -15,13 +14,12 @@ import java.io.IOException;
  * Description: 用户业务
  */
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
-    @Resource
-    private UserMapper userMapper;
+    private final UserMapper userMapper;
 
-    @Autowired
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
 
     /**
      * 添加用户
