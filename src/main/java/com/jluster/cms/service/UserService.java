@@ -5,6 +5,8 @@ import com.jluster.cms.entity.User;
 import com.jluster.cms.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 
@@ -15,6 +17,7 @@ import java.io.IOException;
  */
 @Service
 @RequiredArgsConstructor
+@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 public class UserService {
 
     private final UserMapper userMapper;
@@ -28,6 +31,8 @@ public class UserService {
      */
     public void createUser(User user) {
         userMapper.insertUser(user);
+        //int i = 1/0;
+        System.out.println();
     }
 
     /**
@@ -36,6 +41,7 @@ public class UserService {
      * @param user
      * @return
      */
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public User findUser(User user) {
         User user1 = userMapper.selectUser(user);
         return user1;
