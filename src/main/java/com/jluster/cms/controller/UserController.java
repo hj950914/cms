@@ -32,6 +32,7 @@ public class UserController {
         userService.createUser(user);
     }
 
+
     @GetMapping(value = "/login", consumes = APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "用户登录服务", notes = "根据用户填写的用户名或者邮箱登录")
     public User login(@ApiParam(value = "用户的用户名或者邮箱") @RequestBody User user) {

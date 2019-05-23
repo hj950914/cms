@@ -35,7 +35,7 @@ public class SwaggerConfig {
         ApiInfo apiInfo = new ApiInfoBuilder()
                 .title("Swagger2构建RESTful API文档")
                 .description("SpringBoot集成Springbox开源项目，实现OAS，构建成RESTful API文档")
-                .contact(new Contact("", "", ""))
+                .contact(new Contact("test", "test", "test"))
                 .version("v1.0")
                 .build();
         docket.apiInfo(apiInfo);
