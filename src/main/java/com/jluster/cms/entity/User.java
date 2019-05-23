@@ -1,9 +1,8 @@
 package com.jluster.cms.entity;
 
 import lombok.Data;
-import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 /**
@@ -14,34 +13,64 @@ import java.util.Date;
 @Data
 public class User {
 
-    private Long id;//id
+    /**
+     * 用户id编号
+     */
+    private Long id;
 
-    @NotNull
-    @Length(min = 1, max = 10)
-    private String login;//用户名
+    /**
+     * 用户名
+     */
+    @Pattern(regexp = "^[0-9a-zA-Z_]{4,16}$")
+    private String login;
 
-    @NotNull
-    @Length(min = 10, max = 20)
-    private String email;//邮箱
+    /**
+     * 邮箱
+     */
+    @Pattern(regexp = "^[a-z,A-Z,0-9]+([-_.][a-z,A-Z,0-9]+)*@([a-z,A-Z,0-9]+[-.])+[a-z,A-Z,0-9]{2,4}$")
+    private String email;
 
-    @NotNull
-    @Length(min = 11, max = 11)
-    private String phone;//手机号
+    /**
+     * 手机号
+     */
+    @Pattern(regexp = "^1[3,4,5,7,8][0-9]{9}$")
+    private String phone;
 
-    @NotNull
-    private String password;//密码
+    /**
+     * 密码
+     */
+    @Pattern(regexp = "^[0-9a-zA-Z_]{6,20}$")
+    private String password;
 
-    private String status;//用户状态
+    /**
+     * 用户状态
+     */
+    private String status;
 
-    @NotNull
-    @Length(min = 1, max = 8)
-    private String nick_name;//昵称
+    /**
+     * 昵称
+     */
+    @Pattern(regexp = "^[\\u4e00-\\u9fa5]{4,8}$")
+    private String nick_name;
 
-    private String created_by;//创建人
+    /**
+     * 创建人
+     */
+    private String created_by;
 
-    private String modified_by;//更新人
+    /**
+     * 更新人
+     */
+    private String modified_by;
 
-    private Date created_time;//创建时间
+    /**
+     * 创建时间
+     */
+    private Date created_time;
 
-    private Date modified_time;//更新时间
+    /**
+     * 更新时间
+     */
+    private Date modified_time;
+
 }
