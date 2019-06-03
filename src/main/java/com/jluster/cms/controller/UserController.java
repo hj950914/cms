@@ -33,23 +33,23 @@ public class UserController {
     }
 
 
-    @GetMapping(value = "/login", consumes = APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/loginUser", consumes = APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "用户登录服务", notes = "根据用户填写的用户名或者邮箱登录")
-    public User login(@ApiParam(value = "用户的用户名或者邮箱") @RequestBody User user) {
+    public User loginUser(@ApiParam(value = "用户的用户名或者邮箱") @RequestBody User user) {
         return userService.findUser(user);
     }
 
 
-    @PutMapping(value = "/update/{id}", consumes = APPLICATION_JSON_UTF8_VALUE)
+    @PutMapping(value = "/updateByIdUser/{id}", consumes = APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "用户信息修改服务", notes = "根据用户的id来修改用户的昵称")
-    public String update(@ApiParam(value = "用户id") @PathVariable Long id, @ApiParam(value = "新的昵称") @RequestBody String nick_name) {
+    public String updateByIdUser(@ApiParam(value = "用户id") @PathVariable Long id, @ApiParam(value = "新的昵称") @RequestBody String nick_name) {
         return userService.replaceUser(id, nick_name);
     }
 
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/deleteByIdUser/{id}")
     @ApiOperation(value = "用户删除服务", notes = "根据用户id删除用户")
-    public void deleteById(@ApiParam(value = "用户id") @PathVariable Long id) {
+    public void deleteByIdUser(@ApiParam(value = "用户id") @PathVariable Long id) {
         userService.subUser(id);
     }
 }
