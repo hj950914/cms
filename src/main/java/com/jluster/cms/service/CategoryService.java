@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Author: hj
  * Date: 2019-06-03 14:46
- * Description: 分类业务
+ * Description: 分类管理相关业务
  */
 @Service
 @RequiredArgsConstructor

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jluster.cms.mapper.ContentMapper">
+
+    <sql id="insertContentColumn">
+        sn,title,summary,description,status,body,format,sort,created_by,modified_by
+    </sql>
+
+    <!--新增内容-->
+    <insert id="insertContent" parameterType="com.jluster.cms.entity.Content">
+        insert into cc_content(<include refid="insertContentColumn"/>)
+        values(#{sn},#{title},#{summary},#{description},#{status},#{body},#{format},#{sort},#{created_by},#{modified_by})
+    </insert>
+
+    <!--删除内容-->
+    <delete id="deleteContent" parameterType="Long">
+        delete from cc_content
+        where id=#{id}
+    </delete>
+
+    <!--修改内容-->
+    <update id="updateContent" parameterType="com.jluster.cms.entity.Content">
+        update cc_content
+        set title=#{title},summary=#{summary},description=#{description},body=#{body}
+        where id=#{id}
+    </update>
+
+    <!--查询所有的内容-->
+    <select id="selectContent" resultType="com.jluster.cms.entity.Content">
+        select * from cc_content
+    </select>
+
+</mapper>
