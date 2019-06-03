@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jluster.cms.mapper.Content_CategoryMapper">
+
+    <sql id="insertContent_CategoryColumn">
+        content_id,category_id,deleted,created_by,modified_by
+    </sql>
+
+    <!--新增内容分类-->
+    <insert id="insertContent_Category" parameterType="com.jluster.cms.entity.Content_Category">
+        insert into cc_content_category(<include refid="insertContent_CategoryColumn"/>)
+        values(#{content_id},#{category_id},#{deleted},#{created_by},#{modified_by})
+    </insert>
+
+    <!--删除内容分类-->
+    <delete id="deleteContent_Category" parameterType="Long">
+        delete from cc_content_category
+        where id=#{id}
+    </delete>
+
+    <!--修改内容分类-->
+    <update id="updateContent_Category" parameterType="com.jluster.cms.entity.Content_Category">
+        update cc_content_category
+        set content_id=#{content_id},category_id=#{category_id},deleted=#{deleted}
+        where id=#{id}
+    </update>
+
+    <!--查询所有内容分类-->
+    <select id="selectContent_Category" resultType="com.jluster.cms.entity.Content_Category">
+        select * from cc_content_category
+    </select>
+
+</mapper>
