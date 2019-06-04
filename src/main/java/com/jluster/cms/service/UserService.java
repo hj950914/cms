@@ -43,8 +43,12 @@ public class UserService {
      */
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public User findUser(User user) {
-        User user1 = userMapper.selectUser(user);
-        return user1;
+        User u = userMapper.selectUser(user);
+        if (u != null) {
+            return u;
+        } else {
+            return null;
+        }
     }
 
     /**
