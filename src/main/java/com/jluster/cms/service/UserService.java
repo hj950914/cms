@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jluster.cms.entity.User;
 import com.jluster.cms.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +24,8 @@ public class UserService {
     private final UserMapper userMapper;
 
     private final ObjectMapper objectMapper;
+
+    private final StringRedisTemplate srt;
 
     /**
      * 添加用户
@@ -82,6 +85,16 @@ public class UserService {
      */
     public void subUser(Long id) {
         userMapper.deleteUser(id);
+    }
+
+    /**
+     * 把用户登录会话存入redis中
+     *
+     * @param id        用户id
+     * @param sessionId 会话id
+     */
+    public void addSession(String id, String sessionId) {
+        srt.opsForHash().put("session", id, sessionId);
     }
 
 }

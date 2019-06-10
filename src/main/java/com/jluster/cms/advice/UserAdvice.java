@@ -32,7 +32,7 @@ public class UserAdvice {
     public void doBefore(JoinPoint joinPoint, Object returnValue) {
         User user = (User) returnValue;
         if (user != null) {
-            System.out.println("********用户登录之后将用户" + user.getLogin() + "会话保存到redis中*******");
+            //System.out.println("********用户登录之后将用户" + user.getLogin() + "会话保存到redis中*******");
         }
     }
 

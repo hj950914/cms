@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
@@ -35,8 +36,15 @@ public class UserController {
 
     @PostMapping(value = "/users/login", consumes = APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "用户登录服务", notes = "根据用户填写的用户名或者邮箱登录")
-    public User loginUser(@ApiParam(value = "用户的用户名或者邮箱") @RequestBody User user) {
-        return userService.findUser(user);
+    public User loginUser(@ApiParam(value = "用户的用户名或者邮箱") @RequestBody User user, HttpSession session) {
+        User u = userService.findUser(user);
+        if (u != null) {
+            //获取session的ID存入redis
+            userService.addSession(u.getId().toString(), session.getId());
+            return u;
+        } else {
+            return null;
+        }
     }
 
 
