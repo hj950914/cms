@@ -19,6 +19,13 @@
         where (login=#{login} or email=#{email}) and password=#{password}
     </select>
 
+    <!--根据用户id查找用户-->
+    <select id="selectUserById" parameterType="Long" resultType="com.jluster.cms.entity.User">
+        select <include refid="selectUserColumn"/>
+        from uc_user
+        where id=#{id}
+    </select>
+
     <!--新增用户-->
     <!--返回主键  useGeneratedKeys="true" keyProperty="id"-->
     <insert id="insertUser" parameterType="com.jluster.cms.entity.User">

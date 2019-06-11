@@ -37,13 +37,19 @@ public class UserController {
     @PostMapping(value = "/users/login", consumes = APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "用户登录服务", notes = "根据用户填写的用户名或者邮箱登录")
     public User loginUser(@ApiParam(value = "用户的用户名或者邮箱") @RequestBody User user, HttpSession session) {
-        User u = userService.findUser(user);
-        if (u != null) {
-            //获取session的ID存入redis
-            userService.addSession(u.getId().toString(), session.getId());
-            return u;
-        } else {
-            return null;
+        String userId = userService.getUserId(session.getId());//从缓存获取用户id
+        if (userId != null) {//如果缓存中找到用户id
+            System.out.println("用户登录从缓存中登录");
+            return userService.findUserById(userId);
+        } else {//缓存没有就从数据库查找用户
+            User u = userService.findUser(user);
+            if (u != null) {//用户存在的时候才存入缓存
+                System.out.println("用户登录从数据库中登录");
+                userService.addSession(u.getId().toString(), session.getId());//获取session的ID存入redis
+                return u;
+            } else {
+                return null;
+            }
         }
     }
 

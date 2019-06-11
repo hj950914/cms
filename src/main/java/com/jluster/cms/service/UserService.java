@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Author: hj
@@ -34,8 +35,6 @@ public class UserService {
      */
     public void createUser(User user) {
         userMapper.insertUser(user);
-        //int i = 1/0;
-        System.out.println();
     }
 
     /**
@@ -49,6 +48,15 @@ public class UserService {
         User u = userMapper.selectUser(user);
         if (u != null) {
             return u;
+        } else {
+            return null;
+        }
+    }
+
+    public User findUserById(String id) {
+        User user = userMapper.selectUserById(Integer.valueOf(id).longValue());
+        if (user != null) {
+            return user;
         } else {
             return null;
         }
@@ -94,7 +102,24 @@ public class UserService {
      * @param sessionId 会话id
      */
     public void addSession(String id, String sessionId) {
-        srt.opsForHash().put("session", id, sessionId);
+        //设置会话30分钟过期
+        srt.opsForValue().set(sessionId, id, 30, TimeUnit.MINUTES);
+    }
+
+    /**
+     * 根据会话id在redis中查找缓存,找到了就返回对应的用户id
+     *
+     * @param sessionId 会话id
+     * @return
+     */
+    public String getUserId(String sessionId) {
+        //获取用户id
+        String s = srt.opsForValue().get(sessionId);
+        if (s != null) {
+            return s;
+        } else {
+            return null;
+        }
     }
 
 }

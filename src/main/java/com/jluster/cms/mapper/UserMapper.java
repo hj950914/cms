@@ -39,4 +39,12 @@ public interface UserMapper {
      * @return
      */
     public User selectUser(User user);
+
+    /**
+     * 根据用户id查找用户
+     *
+     * @param id
+     * @return
+     */
+    public User selectUserById(Long id);
 }
