@@ -26,7 +26,6 @@ public class UserController {
 
     private final UserService userService;
 
-
     @PostMapping(value = "/users/registration", consumes = APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "用户注册服务", notes = "根据用户填写的信息来注册用户")
     public void addUser(@ApiParam(value = "用户的信息") @RequestBody @Valid User user) {

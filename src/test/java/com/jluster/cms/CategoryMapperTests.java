@@ -19,6 +19,8 @@ public class CategoryMapperTests {
     @Resource
     private CategoryMapper categoryMapper;
 
+
+
     /**
      * 新增分类测试
      */
@@ -36,5 +38,6 @@ public class CategoryMapperTests {
         category.setModified_by("更新人");
         categoryMapper.insertCategory(category);
     }
+
 
 }
