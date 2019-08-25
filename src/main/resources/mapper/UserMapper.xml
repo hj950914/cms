@@ -44,4 +44,11 @@
     <delete id="deleteUser" parameterType="Long">
         delete from uc_user where id=#{id}
     </delete>
+
+    <!--获取所有用户-->
+    <select id="selectAll" resultType="com.jluster.cms.entity.User">
+        select
+        <include refid="selectUserColumn"/>
+        from uc_user
+    </select>
 </mapper>

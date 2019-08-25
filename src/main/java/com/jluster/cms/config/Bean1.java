@@ -14,20 +14,20 @@ import javax.annotation.PreDestroy;
 public class Bean1 {
 
     public Bean1() {
-        System.out.println("构造方法执行。。。。。");
+        //System.out.println("构造方法执行。。。。。");
     }
 
     @PostConstruct
     public void init(){
-        System.out.println("初始化方法执行。。。。。");
+        //System.out.println("初始化方法执行。。。。。");
     }
 
     @PreDestroy
     public void destory(){
-        System.out.println("销毁方法执行。。。。。。");
+        //System.out.println("销毁方法执行。。。。。。");
     }
 
     public void printTest(){
-        System.out.println("使用这个bean的方法。。。。。");
+        //System.out.println("使用这个bean的方法。。。。。");
     }
 }

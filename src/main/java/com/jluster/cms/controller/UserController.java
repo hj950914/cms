@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import java.util.List;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 
 /**
@@ -50,6 +52,16 @@ public class UserController {
                 return null;
             }
         }
+    }
+
+    /**
+     * 返回用户列表
+     *
+     * @return
+     */
+    @GetMapping(value = "/users/all")
+    public List<User> returnAllUsers() {
+        return userService.findAllUser();
     }
 
 

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -102,7 +103,7 @@ public class UserService {
      * @param sessionId 会话id
      */
     public void addSession(String id, String sessionId) {
-        //设置会话30分钟过期
+        // 设置会话30分钟过期
         srt.opsForValue().set(sessionId, id, 30, TimeUnit.MINUTES);
     }
 
@@ -113,10 +114,24 @@ public class UserService {
      * @return
      */
     public String getUserId(String sessionId) {
-        //获取用户id
+        // 获取用户id
         String s = srt.opsForValue().get(sessionId);
         if (s != null) {
             return s;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * 获取所有用户
+     *
+     * @return
+     */
+    public List<User> findAllUser() {
+        List<User> userList = userMapper.selectAll();
+        if (userList != null) {
+            return userList;
         } else {
             return null;
         }

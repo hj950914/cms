@@ -3,6 +3,8 @@ package com.jluster.cms.mapper;
 import com.jluster.cms.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * Author: hj
  * Date: 2019-05-21 14:19
@@ -47,4 +49,11 @@ public interface UserMapper {
      * @return
      */
     public User selectUserById(Long id);
+
+    /**
+     * 获取所有用户
+     *
+     * @return
+     */
+    public List<User> selectAll();
 }
